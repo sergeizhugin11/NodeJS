@@ -1,0 +1,9 @@
+{
+    "faculty": "it",
+    "group": "4",
+    "student": "Zhugin",
+    "subject": {
+      "name": "cross-platform network application programming",
+      "lab": "7"
+    }
+}

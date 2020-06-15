@@ -1,0 +1,18 @@
+{
+  "name": "21",
+  "version": "0.0.0",
+  "description": "21",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "digest": "0.0.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
+    "passport-http": "^0.3.0"
+  }
+}

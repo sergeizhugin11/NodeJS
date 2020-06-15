@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h1>nextTick</h1>
+<div id = "divResult"></div>
+<script type="text/javascript">
+	var buffer = ''
+	const d = Date.now(); 
+	for(var i = 2;i<20;i++){
+
+   fetch('http://localhost:1337/nextTick?k=' + i)
+  .then(response => response.json())
+  .then(text => buffer =  buffer + text.k +'! = ' + text.facto + ' , Result : ' + (Date.now() - d - text.k/text.facto) + '\n')
+  .then(buffer => divResult.innerText = buffer)
+}
+//divResult.innerText = buffer;
+</script>
+</body>
+</html>

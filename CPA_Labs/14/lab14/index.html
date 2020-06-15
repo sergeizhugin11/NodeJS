@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body onload="getPulpits()">
+
+<button onclick="getPulpits()">Refresh</button>
+<hr/>
+<br/>
+<section id="select-pulpits"></section>
+<hr/>
+
+<section id="insert-pulpit">
+    <div>
+        <label>
+            <input name="newPulpitData" id="id" type="text" placeholder="Id">
+        </label>
+        <label>
+            <input name="newPulpitData" id="name" type="text" placeholder="Name">
+        </label>
+        <label>
+            <input name="newPulpitData" id="faculty" type="text" placeholder="Faculty Id">
+        </label>
+    </div>
+    <button onclick="submit()">Update</button>
+</section>
+<section id="update-pulpit">
+    <div>
+        <label>
+            <input name="newPulpitData1" id="id1" type="text" placeholder="Id">
+        </label>
+        <label>
+            <input name="newPulpitData1" id="name1" type="text" placeholder="Name">
+        </label>
+        <label>
+            <input name="newPulpitData1" id="faculty1" type="text" placeholder="Faculty Id">
+        </label>
+    </div>
+    <button onclick="submit1()">Insert</button>
+</section>
+<br/>
+<br/>
+<section id="errors" style="color: red; font-size: 20px;"></section>
+<button id="close-error" style="display: none;" onclick="closeError()">Close</button>
+
+<script>
+        const ENDPOINT = 'http://localhost:5000/api/pulpits';
+
+    function getPulpits() {
+        fetch(ENDPOINT).then(response => response.json())
+            .then(response => {
+                console.log(response);
+                checkErrors(response);
+                let container = document.getElementById('select-pulpits');
+                container.innerHTML = '';
+                response.forEach(pulpit => {
+                    let pulpitContainer = document.createElement('div');
+
+                    let deleteButton = document.createElement('button');
+                    deleteButton.setAttribute('onclick', 'deletePulpit(event)');
+                    deleteButton.setAttribute('pulpitId', pulpit.PULPIT);
+                    deleteButton.innerText = 'Delete';
+
+                    pulpitContainer.innerHTML = `<span>${pulpit.PULPIT}. ${pulpit.PULPIT_NAME}, Faculty - ${pulpit.FACULTY}</span>`;
+                    pulpitContainer.appendChild(deleteButton);
+
+                    container.append(pulpitContainer, document.createElement('br'));
+                });
+            });
+    }
+
+    function submit() {
+        let pulpitData = Array.from(document.getElementsByName('newPulpitData')).map(a => {
+            return {field: a.getAttribute('id'), value: a.value};
+        });
+        console.log(pulpitData);
+        let pulpitId = pulpitData.find(a => a.field === 'id').value;
+        console.log(pulpitId);
+        console.log(pulpitData);
+
+        upsert(pulpitData, pulpitId);
+    }
+        function submit1() {
+            let pulpitData = Array.from(document.getElementsByName('newPulpitData1')).map(a => {
+                return {field: a.getAttribute('id'), value: a.value};
+            });
+            console.log(pulpitData);
+
+            let pulpitId = pulpitData.find(a => a.field === 'id1').value;
+            console.log(pulpitId);
+            console.log(pulpitData);
+
+            upsert1(pulpitData, pulpitId);
+        }
+
+    function upsert1(pulpitData, pulpitId) {
+        console.log(pulpitId);
+        console.log(pulpitData);
+        console.log(JSON.stringify({
+            PULPIT: pulpitId ? pulpitId : undefined,
+            PULPIT_NAME: pulpitData.find(a => a.field === 'name1').value,
+            FACULTY: pulpitData.find(a => a.field === 'faculty1').value
+        }));
+        fetch(ENDPOINT, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                PULPIT: pulpitId ? pulpitId : undefined,
+                PULPIT_NAME: pulpitData.find(a => a.field === 'name1').value,
+                FACULTY: pulpitData.find(a => a.field === 'faculty1').value
+            })
+        }).then(response => response.json())
+            .then(response => {
+                checkErrors(response);
+                getPulpits();
+            });
+    }
+
+        function upsert(pulpitData, pulpitId) {
+            console.log(pulpitId);
+            console.log(pulpitData);
+            console.log(JSON.stringify({
+                PULPIT: pulpitId ? pulpitId : undefined,
+                PULPIT_NAME: pulpitData.find(a => a.field === 'name').value,
+                FACULTY: pulpitData.find(a => a.field === 'faculty').value
+            }));
+            fetch(ENDPOINT, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    PULPIT: pulpitId ? pulpitId : undefined,
+                    PULPIT_NAME: pulpitData.find(a => a.field === 'name').value,
+                    FACULTY: pulpitData.find(a => a.field === 'faculty').value
+                })
+            }).then(response => response.json())
+                .then(response => {
+                    checkErrors(response);
+                    getPulpits();
+                });
+        }
+
+    function deletePulpit(event) {
+        if (confirm('Are you sure you want to remove this record?')) {
+            console.log(ENDPOINT + '/' + event.target.getAttribute('pulpitId'));
+            fetch(ENDPOINT + '/' + event.target.getAttribute('pulpitId'), {method: 'DELETE'})
+                .then(response => response.json())
+                .then(response => {
+                    checkErrors(response);
+                    getPulpits();
+                });
+        }
+    }
+
+    function checkErrors(response) {
+        if (response.error) {
+            document.getElementById('errors').innerText = response.error;
+            document.getElementById('close-error').style.display = 'block';
+        }
+    }
+
+    function closeError() {
+        document.getElementById('errors').innerText = '';
+        document.getElementById('close-error').style.display = 'none';
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "23",
+  "version": "0.0.0",
+  "description": "23",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1"
+  }
+}

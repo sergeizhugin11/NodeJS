@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>03-03</title>
+</head>
+
+<body>
+<div id="result"/>
+
+
+<script>
+    let index = 0;
+    const startTime = Date.now();
+    for (let k=0; k<20; k++) {
+        console.log(index);
+        fetch(`http://localhost:5000/fact?k=${k}`)
+            .then(response => response.json())
+            .then(data => {
+                let div = document.createElement('div');
+                div.innerText = `${index++}. Результат: ${(Date.now() - startTime)} - ${data.k}/${data.fact}`;
+                document.getElementById('result').appendChild(div);
+            })
+    }
+</script>
+</body>
+</html>

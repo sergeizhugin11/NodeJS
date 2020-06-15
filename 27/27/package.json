@@ -1,0 +1,13 @@
+{
+  "name": "27",
+  "version": "0.0.0",
+  "description": "27",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "https": "^1.0.0",
+    "node-telegram-bot-api": "^0.50.0"
+  }
+}

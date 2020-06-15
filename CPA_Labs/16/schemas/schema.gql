@@ -1,0 +1,59 @@
+type FACULTY {
+    FACULTY_ID: Int!
+    FACULTY_NAME: String!
+    PULPITS: [PULPIT]
+}
+type PULPIT {
+    PULPIT_ID: Int!
+    PULPIT_NAME: String!
+    FACULTY: FACULTY!
+}
+type SUBJECT {
+    SUBJECT_ID: Int!
+    SUBJECT_NAME: String!
+    PULPIT: PULPIT!
+}
+type TEACHER {
+    TEACHER_ID: Int!
+    TEACHER_NAME: String!
+    PULPIT: PULPIT!
+}
+
+input NewFACULTY {
+    FACULTYID: Int
+    FACULTYName: String!
+}
+input NewPULPIT {
+    PULPITID: Int
+    PULPITName: String!
+    FACULTYID: Int
+}
+input NewSUBJECT {
+     SUBJECTID: Int
+     SUBJECTName: String!
+     PULPITID: Int
+ }
+input NewTEACHER {
+    TEACHERID: Int
+    TEACHERName: String!
+    PULPITID: Int
+}
+
+
+type Query {
+    getFaculties(FACULTY: Int): [FACULTY]
+    getPULPITs(PULPIT: Int): [PULPIT]
+    getSUBJECTs(SUBJECT: Int, FACULTY: Int): [SUBJECT]
+    getTEACHERs(TEACHER: Int, FACULTY: Int): [TEACHER]
+}
+type Mutation {
+    setFACULTY(FACULTY: NewFACULTY!): FACULTY
+    setPULPIT(PULPIT: NewPULPIT!): PULPIT
+    setSUBJECT(SUBJECT: NewSUBJECT!): SUBJECT
+    setTEACHER(TEACHER: NewTEACHER!): TEACHER
+
+    delFACULTY(ID: Int!): FACULTY
+    delPULPIT(ID: Int!): PULPIT
+    delSUBJECT(ID: Int!): SUBJECT
+    delTEACHER(ID: Int!): TEACHER
+}

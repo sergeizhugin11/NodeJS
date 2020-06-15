@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script>
+        function Send() {
+            fetch('http://localhost:3000/', {
+                method: 'POST', mode: 'no-cors',
+                headers: {'Content-Type':'application/json', 'Accept':'text/html'},
+                body: JSON.stringify({from: sender.value, to: receiver.value, text: text.value})
+            })
+                .then(response => response.text())
+                .then(pdata => alert(pdata));
+        }
+    </script>
+</head>
+<body>
+    <form class="mx-auto bg-light w-50 p-3">
+        <div class="form-group">
+            <label for="sender">From</label>
+            <input type="email" class="form-control" id="sender" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="receiver">To</label>
+            <input type="email" class="form-control" id="receiver" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="text">Text</label>
+            <textarea class="form-control" id="text"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="Send()">Send</button>
+    </form>
+</body>
+</html>

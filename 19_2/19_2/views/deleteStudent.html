@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        function getMulty()
+        {
+            let httpR = new XMLHttpRequest();
+            httpR.open('DELETE', 'http://localhost:3000/students/delStudent?studentId=' + document.getElementById("studentId").value);
+            httpR.onreadystatechange = ()=> {
+                
+            };
+
+            httpR.send(null);
+        }
+    </script>
+    <div style="padding: 20px">
+        <div class="container">
+            <h1>Delete Student By ID</h1>
+            <hr>
+
+            <label>
+                <b>Student ID</b>
+                <input type="number" placeholder="Enter Student ID" name="studentId" id="studentId" required>
+            </label>
+            <hr>
+
+            <button type="submit" class="registerbtn" onclick="getMulty()">Create</button>
+        </div>
+
+        <div class="container signin">
+            <p>Don't have the account? <a href="/students/getStudents">View Students</a>.</p>
+        </div>
+    </div>
+</body>
+</html>

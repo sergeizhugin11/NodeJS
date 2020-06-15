@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="getText()">
+<div></div>
+<script>
+    function getText() {
+        let n = 0;
+        const d = Date.now();
+        for(let k = 0;k < 5; k++) {
+            fetch(`http://localhost:3000/factA?k=${k}`)
+                .then(response=>response.json())
+                .then(pdata=> {
+                    console.log(pdata);
+                    document.getElementsByTagName("div")[0].innerHTML += (n++)+' result: '+ (Date.now()-d)+' - '+ pdata.k + '/' + pdata.fact +'<br>';
+                })
+        }
+    }
+</script>
+</body>
+</html>

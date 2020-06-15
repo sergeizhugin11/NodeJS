@@ -1,0 +1,76 @@
+1. Шаблонизация: механизм генерации текстового на основе готового шаблона. 
+2. 2. Шаблон: (template) статический текст с вкраплениями  специальных 
+символов (комбинацией символов), предназначенных для динамической генерации 
+новых фрагментов текста. 
+3. Обьект передаваемый в шаблон
+4. 
+5. Кроме обычных представлений метод действия может также возвращать частичные представления.
+Их отличительной особенностью является то, что их можно встраивать в другие обычные представления. 
+6. Кроме языка шаблонов, который предлагает нам Handlebars, он также позволяет создавать обработчики 
+(хендлеры). Думаю, что в другой среде это могло бы назваться макросы, или вы можете их рассматривать
+ как подпрограммы.
+
+Они позволяют нам создавать повторно используемые выражения.
+
+На сайте Handlebars есть несколько примеров хелперов блоков, но я собираюсь показать немного другие. Давайте начнем с самого
+ простого хелпера. Он возвращает HTML сниппет.
+7.  if — используйте этот хелпер для вывода блока по условию.
+    unless — используйте этот хелпер как обратный хелперу if. Блок будет выведен, если выражение вернет ложное значение.
+    each — используйте этот хелпер для перебора списков. Внутри блока Вы можете использовать this для ссылки на элемент списка.
+    with — используйте этот хелпер для сдвига контекста секции handlebars-шаблона.
+    log — позволяет логировать состояние контекста во время выполнения шаблона.
+8. Для предоставления статических файлов, например, изображений, файлов CSS и JavaScript в Express 
+используется функция промежуточной обработки express.static.
+
+Для того чтобы начать непосредственное предоставление файлов, необходимо передать имя каталога, 
+в котором находятся статические ресурсы, в функцию промежуточной обработки express.static. 
+Например, воспользуйтесь приведенным ниже кодом для предоставления изображений, файлов CSS и 
+JavaScript, расположенных в каталоге public:
+9. Cache-control - Для того, чтобы управлять кэшированием в браузере используется 
+HTTP заголовок Cache-control. Его необходимо передавать со всеми файлами, 
+которые нужно кэшировать. Он имеет следующий формат:
+ private означает, кто кэширование будет работать только на браузере пользователя. Вместо этого Вы можете использовать инструкцию 
+ public. Это разрешает кэширование на публичных прокси-серверах (такие часто есть в компаниях).
+ no-cache означает, что данный запрос нельзя кэшировать.
+ max-age это время, на которое будет закэширован результат. Устанавливается в секундах.
+   ETag - Заголовок ответа ETag (entity tag) предоставляет механизм для кэширования 
+неизмененных ресурсов. Это значение является идентификатором, который представляет 
+конкретную версию ресурса. Вот пример заголовка ETag:
+ETag: "версия1"
+   Last-Modified - The last-modified header is a response header used with 
+a request header called “If modified” header. The If-modified header sends a request to the server 
+to know when the resource was last modified. The last-modified header tells the browser when the 
+resource was last modified, and whether it should use the cached copy or download the newer 
+version of the website. These are cache-control headers.
+   If-Modified-Since - Если клиент (браузер, поисковый робот) получил заголовок Last-Modified, 
+то при следующем обращении к адресу, при условии, что страница (объект) есть в локальном кеше,
+ он добавит вопрос If-Modified-Since (не изменилась ли страница после даты, полученной в 
+Last-Modified). В свою очередь сервер, получив запрос If-Modified-Since должен сверить 
+полученную временную метку с временем последнего изменения страницы и, если страница не изменялась 
+ответить 304 Not Modified.
+   If-None-Match - The HTTP Header If-None-Match is a request-type header. 
+Generally, it is used to update the entity tags on the server. 
+Firstly, the Client provides the Server with a set of entity tags (E-tags).
+The Server compares the given tags with those it already has for the resource. 
+Then, the Server will provide the requested page with a 200 status code only 
+when none of the entity tags given to it matches. Or else, a 304 Not Modified status 
+is returned by the Server.
+10.
+11-12. The res.attachment "Sets the HTTP response Content-Disposition header field to “attachment”."
+
+This essentially says, 'Hey, this file should be viewed as an attachment, not a webpage.'
+
+Whereas the res.download "Transfers the file at path as an “attachment”. Typically, browsers will prompt the user for download."
+res.attachment()
+// Content-Disposition: attachment
+
+res.attachment('path/to/logo.png')
+// Content-Disposition: attachment; filename="logo.png"
+// Content-Type: image/png
+
+13.attachment означает передача браузеру рекомендации не открывать файл в браузере (например GIF файл) , а вывести стандартное окошко сохранения файла.
+В этом случае используется формат
+Content-disposition: attachment; filename=filename.gif
+filename.gif — это имя, под которым будет предложено сохранить файл
+inline явно указывает браузеру, что файл надо вывести в окне браузера. 
+Если у пользователя нет средства просмотра этого файла, то у него будет выведен код этого файла.

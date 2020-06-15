@@ -1,0 +1,12 @@
+{
+  "name": "17",
+  "version": "0.0.0",
+  "description": "17",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "redis": "^3.0.2"
+  }
+}

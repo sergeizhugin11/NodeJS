@@ -1,0 +1,21 @@
+<html>
+<body>
+    <h1>Laba 10</h1>
+    <script>
+        let k = 0;
+        function startWS()
+        {
+            let socket = new WebSocket('ws:/localhost:4000/wsserver');
+            socket.onopen = () => {
+                console.log('socket.onopen');
+                setInterval(() => { socket.send(++k); }, 1000);
+            };
+            socket.onclose = (e) => { console.log('socket.onclose', e); };
+            socket.onmessage = (e) => { console.log('socket.onmessage', e.data); };
+            socket.onerror = (e) => { alert('socket.onerror' + e.message); };
+        }
+    </script>
+    <button onclick="startWS()">startWS</button>
+</body>
+
+</html>

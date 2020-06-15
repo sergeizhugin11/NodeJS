@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://unpkg.com/picnic">
+</head>
+<body>
+
+
+<form action="/students/newStudent" method="post">
+    <div class="container">
+        <h1>New Student</h1>
+        <hr>
+
+        <label>
+            <b>First Name</b>
+            <input type="text" placeholder="Enter First Name" name="firstName" required>
+        </label>
+
+        <label>
+            <b>Last Name</b>
+            <input type="text" placeholder="Enter Last Name" name="lastName" required>
+        </label>
+        <hr>
+
+	<label>
+            <b>Group</b>
+            <input type="number" placeholder="Enter group number" name="group" required>
+        </label>
+        <hr>
+
+	<label>
+            <b>Course</b>
+            <input type="number" placeholder="Enter course number" name="course" required>
+        </label>
+        <hr>
+
+        <button type="submit" class="registerbtn">Create</button>
+    </div>
+
+    <div class="container signin">
+        <p>Don't have the account? <a href="/students/getStudents">View Students</a>.</p>
+    </div>
+</form>
+
+</body>
+</html>

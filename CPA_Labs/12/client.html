@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Ws</h1>
+<button onclick="startWS()">start WS</button>
+
+<h1>Received:</h1>
+<div id="res"></div>
+<br><br>
+<h1>Sent:</h1>
+<div id="req"></div>
+<h1>Received:</h1>
+<div id="resBroad"></div>
+<br><br>
+<h1>Sent:</h1>
+<div id="reqBroad"></div>
+<script>
+    n = 1;
+    function startWS() {
+        let ws = new RPCWebSocket('ws://localhost:4000/')
+        ws.onopen = function(){
+            console.log('connection')
+        };
+        ws.onmessage = function(message) {
+            let req = document.getElementById('req');
+            req.innerHTML += message.data + '<br>';
+        };
+        ws.subscribe('changed');
+        ws.on('changed',()=>{
+            console.log('changed');
+        })
+        let set = setInterval(()=>{
+            ws.send(JSON.stringify({'10-01-client': n}));
+            let res = document.getElementById('res');
+            res.innerHTML+=JSON.stringify({'10-01-client': n})+'<br>';
+            n++;
+        },3000);
+        setTimeout(()=>{
+            clearInterval(set);
+            ws.close();
+        },25000);
+    }
+</script>

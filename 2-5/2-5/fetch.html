@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>fetch</h1>
+    <div id="divResult"></div>
+    <script type="text/javascript">
+        fetch('http://localhost:2020/api/name')
+            .then(response => response.text())
+            .then(text => divResult.innerText = text)
+    </script>
+</body>
+</html>

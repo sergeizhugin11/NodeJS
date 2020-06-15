@@ -1,0 +1,21 @@
+{
+  "name": "m0603zsy",
+  "version": "1.0.0",
+  "description": "6",
+  "main": "server.js",
+  "author": "Sergey Zhugin",
+  "dependencies": {
+    "express": "^4.17.1",
+    "m0603zsyzsy": "^1.0.0",
+    "nodemailer": "^6.3.0",
+    "sendmail": "^1.6.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "laba6"
+  ],
+  "license": "ISC"
+}

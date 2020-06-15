@@ -1,0 +1,13 @@
+{
+  "name": "28",
+  "version": "0.0.0",
+  "description": "28",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "swagger-ui-express": "^4.1.4"
+  }
+}

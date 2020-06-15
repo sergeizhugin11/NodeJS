@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xmlhttprequest</title>
+</head>
+<body onload="getText()">
+<div></div>
+<script>
+    function getText() {
+        let httpR = new XMLHttpRequest();
+        httpR.open('GET', 'http://localhost:5001/api/name');
+        httpR.onreadystatechange = ()=> {
+        if(httpR.readyState === 4 && httpR.status === 200)
+        {
+                document.getElementsByTagName("div")[0].innerHTML += httpR.responseText;
+        }
+        else {
+            console.log(httpR.status);
+        }
+    };
+
+        httpR.send(null);
+
+
+    }
+</script>
+</body>
+</html>

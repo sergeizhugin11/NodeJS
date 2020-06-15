@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <student>
+        <name>Polina</name>
+        <age>19</age>
+    </student>
+    <student>
+        <name>Anna</name>
+        <age>17</age>
+    </student>
+</root>

@@ -1,0 +1,10 @@
+{
+  "name": "lab12",
+  "version": "1.0.0",
+  "dependencies": {
+    "body-parser": "latest",
+    "express": "^4.17.1",
+    "rpc-websockets": "^5.0.6",
+    "websockets": "^0.2.0"
+  }
+}
